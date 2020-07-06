@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,9 @@
 		9356CD5324B391B90039EF46 /* MyMoviesFRT.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9356CD5124B391B90039EF46 /* MyMoviesFRT.xcdatamodeld */; };
 		9356CD5524B391BA0039EF46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9356CD5424B391BA0039EF46 /* Assets.xcassets */; };
 		9356CD5824B391BA0039EF46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9356CD5624B391BA0039EF46 /* LaunchScreen.storyboard */; };
+		93AA9FFC24B3990B00BB6BCD /* MVVMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AA9FFB24B3990B00BB6BCD /* MVVMViewModel.swift */; };
+		93AA9FFE24B3992100BB6BCD /* MVVMRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AA9FFD24B3992100BB6BCD /* MVVMRouter.swift */; };
+		93AAA00024B3995900BB6BCD /* MVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AA9FFF24B3995900BB6BCD /* MVVMViewController.swift */; };
 		D85694C5E59073AD2CBCD5A0 /* Pods_MyMoviesFRT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735F47667B80E2F768DB3E13 /* Pods_MyMoviesFRT.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +31,9 @@
 		9356CD5424B391BA0039EF46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9356CD5724B391BA0039EF46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9356CD5924B391BA0039EF46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93AA9FFB24B3990B00BB6BCD /* MVVMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMViewModel.swift; sourceTree = "<group>"; };
+		93AA9FFD24B3992100BB6BCD /* MVVMRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMRouter.swift; sourceTree = "<group>"; };
+		93AA9FFF24B3995900BB6BCD /* MVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMViewController.swift; sourceTree = "<group>"; };
 		BE4DF39D8CDD87B96E565EF0 /* Pods-MyMoviesFRT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMoviesFRT.release.xcconfig"; path = "Target Support Files/Pods-MyMoviesFRT/Pods-MyMoviesFRT.release.xcconfig"; sourceTree = "<group>"; };
 		D88707FB41376B3506FDCFC8 /* Pods-MyMoviesFRT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMoviesFRT.debug.xcconfig"; path = "Target Support Files/Pods-MyMoviesFRT/Pods-MyMoviesFRT.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +71,7 @@
 		9356CD4724B391B90039EF46 /* MyMoviesFRT */ = {
 			isa = PBXGroup;
 			children = (
+				93AA9FF924B3989E00BB6BCD /* Sources */,
 				9356CD4824B391B90039EF46 /* AppDelegate.swift */,
 				9356CD4A24B391B90039EF46 /* SceneDelegate.swift */,
 				9356CD4C24B391B90039EF46 /* ViewController.swift */,
@@ -77,13 +84,30 @@
 			path = MyMoviesFRT;
 			sourceTree = "<group>";
 		};
+		93AA9FF924B3989E00BB6BCD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				93AA9FFA24B398BF00BB6BCD /* MVVMRBaseProtocols */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		93AA9FFA24B398BF00BB6BCD /* MVVMRBaseProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				93AA9FFB24B3990B00BB6BCD /* MVVMViewModel.swift */,
+				93AA9FFD24B3992100BB6BCD /* MVVMRouter.swift */,
+				93AA9FFF24B3995900BB6BCD /* MVVMViewController.swift */,
+			);
+			path = MVVMRBaseProtocols;
+			sourceTree = "<group>";
+		};
 		9D66526F64147F62756C6E44 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				D88707FB41376B3506FDCFC8 /* Pods-MyMoviesFRT.debug.xcconfig */,
 				BE4DF39D8CDD87B96E565EF0 /* Pods-MyMoviesFRT.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -212,7 +236,10 @@
 			files = (
 				9356CD4D24B391B90039EF46 /* ViewController.swift in Sources */,
 				9356CD5324B391B90039EF46 /* MyMoviesFRT.xcdatamodeld in Sources */,
+				93AAA00024B3995900BB6BCD /* MVVMViewController.swift in Sources */,
 				9356CD4924B391B90039EF46 /* AppDelegate.swift in Sources */,
+				93AA9FFC24B3990B00BB6BCD /* MVVMViewModel.swift in Sources */,
+				93AA9FFE24B3992100BB6BCD /* MVVMRouter.swift in Sources */,
 				9356CD4B24B391B90039EF46 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +387,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MyMoviesFRT/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -367,7 +395,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.archil.MyMoviesFRT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -378,6 +406,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MyMoviesFRT/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -385,7 +414,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.archil.MyMoviesFRT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
