@@ -1,20 +1,20 @@
 //
-//  ViewController.swift
+//  DiscoverVC.swift
 //  MyMoviesFRT
 //
-//  Created by Archil on 7/6/20.
+//  Created by Archil on 7/7/20.
 //  Copyright © 2020 Flat Rock Technology. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class DiscoverVC: UIViewController, MVVMViewController {
+    
+    var viewModel: DiscoverVMProtocol!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
-
-
+    
 }
-
