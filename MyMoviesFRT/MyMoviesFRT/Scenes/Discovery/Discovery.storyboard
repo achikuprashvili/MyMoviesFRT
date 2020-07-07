@@ -12,7 +12,7 @@
         <!--My ProfileVC-->
         <scene sceneID="BDy-VB-KkN">
             <objects>
-                <viewController storyboardIdentifier="DiscoverVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nKZ-gc-azh" customClass="DiscoverVC" customModule="FirstAffair" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DiscoveryVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nKZ-gc-azh" customClass="DiscoveryVC" customModule="FirstAffair" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jhv-Hu-hDP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

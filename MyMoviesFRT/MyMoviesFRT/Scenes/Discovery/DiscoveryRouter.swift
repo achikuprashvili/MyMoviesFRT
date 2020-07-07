@@ -1,5 +1,5 @@
 //
-//  DiscoverRouter.swift
+//  DiscoveryRouter.swift
 //  MyMoviesFRT
 //
 //  Created by Archil on 7/7/20.
@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-class DiscoverRouter: MVVMRouter {
+class DiscoveryRouter: MVVMRouter {
     
     enum PresentationContext {
+        case fromCoordinator
     }
     
     enum RouteType {
@@ -42,12 +43,14 @@ class DiscoverRouter: MVVMRouter {
         }
         baseViewController = baseVC
         
-        let vc = DiscoverVC.instantiateFromStoryboard(storyboardName: "Discover", storyboardId: "DiscoverVC")
-        let viewModel = DiscoverVM.init(with: self)
+        let vc = DiscoveryVC.instantiateFromStoryboard(storyboardName: "Discovery", storyboardId: "DiscoveryVC")
+        let viewModel = DiscoveryVM.init(with: self, tmdbManager: dependencies.tmdbManager)
         vc.viewModel = viewModel
         
         switch presentationContext {
         
+        case .fromCoordinator:
+            nc.viewControllers = [vc]
         }
     }
     

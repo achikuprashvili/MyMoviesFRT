@@ -1,5 +1,5 @@
 //
-//  DiscoverVC.swift
+//  DiscoveryVC.swift
 //  MyMoviesFRT
 //
 //  Created by Archil on 7/7/20.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class DiscoverVC: UIViewController, MVVMViewController {
+class DiscoveryVC: UIViewController, MVVMViewController {
     
-    var viewModel: DiscoverVMProtocol!
+    var viewModel: DiscoveryVMProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()

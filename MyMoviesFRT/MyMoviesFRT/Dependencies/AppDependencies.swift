@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct AppDependencies {
+    var tmdbManager: TMDBManagerProtocol
+    
+    init(backendManager: BackendManager) {
+        self.tmdbManager = TMDBManager(backendManager: backendManager)
+    }
+}
