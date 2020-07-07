@@ -19,17 +19,26 @@ class DiscoveryVM: MVVMViewModel {
     
     let router: MVVMRouter
     let tmdbManager: TMDBManagerProtocol
+    let networkManager: NetworkManagerProtocol
     let disposeBag = DisposeBag()
     
     //==============================================================================
     
-    init(with router: MVVMRouter, tmdbManager: TMDBManagerProtocol) {
+    init(with router: MVVMRouter, tmdbManager: TMDBManagerProtocol, networkManager: NetworkManagerProtocol) {
         self.router = router
         self.tmdbManager = tmdbManager
+        self.networkManager = networkManager
+        initObservables()
         fetchDiscovery()
     }
     
     //==============================================================================
+    
+    private func initObservables() {
+        networkManager.isReachable.subscribe(onNext: { (value) in
+            
+        }).disposed(by: disposeBag)
+    }
 }
 
 extension DiscoveryVM: DiscoveryVMProtocol {

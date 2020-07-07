@@ -36,6 +36,7 @@
 		93AAA00A24B39C9F00BB6BCD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AAA00924B39C9F00BB6BCD /* Constants.swift */; };
 		93AAA00C24B3DDDF00BB6BCD /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AAA00B24B3DDDF00BB6BCD /* AppDependencies.swift */; };
 		93AAA01724B3DEA400BB6BCD /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AAA01624B3DEA400BB6BCD /* UIViewController+Extension.swift */; };
+		93C2887324B420A00052A476 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2887224B420A00052A476 /* NetworkManager.swift */; };
 		D85694C5E59073AD2CBCD5A0 /* Pods_MyMoviesFRT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735F47667B80E2F768DB3E13 /* Pods_MyMoviesFRT.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		93AAA00924B39C9F00BB6BCD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		93AAA00B24B3DDDF00BB6BCD /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		93AAA01624B3DEA400BB6BCD /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		93C2887224B420A00052A476 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		BE4DF39D8CDD87B96E565EF0 /* Pods-MyMoviesFRT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMoviesFRT.release.xcconfig"; path = "Target Support Files/Pods-MyMoviesFRT/Pods-MyMoviesFRT.release.xcconfig"; sourceTree = "<group>"; };
 		D88707FB41376B3506FDCFC8 /* Pods-MyMoviesFRT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMoviesFRT.debug.xcconfig"; path = "Target Support Files/Pods-MyMoviesFRT/Pods-MyMoviesFRT.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -189,6 +191,7 @@
 				9324BFAF24B3F580002125BC /* Models */,
 				9324BFAC24B3F382002125BC /* TMDBManager */,
 				93AAA00524B39B4F00BB6BCD /* BackendManager.swift */,
+				93C2887224B420A00052A476 /* NetworkManager.swift */,
 				93AAA00724B39B9000BB6BCD /* RequestRouter.swift */,
 				93AAA00B24B3DDDF00BB6BCD /* AppDependencies.swift */,
 			);
@@ -372,6 +375,7 @@
 				9356CD5324B391B90039EF46 /* MyMoviesFRT.xcdatamodeld in Sources */,
 				93AAA00024B3995900BB6BCD /* MVVMViewController.swift in Sources */,
 				9356CD4924B391B90039EF46 /* AppDelegate.swift in Sources */,
+				93C2887324B420A00052A476 /* NetworkManager.swift in Sources */,
 				9371F00224B40E6E00D39F3F /* MovieVC.swift in Sources */,
 				93AA9FFC24B3990B00BB6BCD /* MVVMViewModel.swift in Sources */,
 				93AAA00824B39B9000BB6BCD /* RequestRouter.swift in Sources */,
@@ -517,7 +521,9 @@
 			baseConfigurationReference = D88707FB41376B3506FDCFC8 /* Pods-MyMoviesFRT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MyMoviesFRT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -526,6 +532,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.archil.MyMoviesFRT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -536,7 +543,9 @@
 			baseConfigurationReference = BE4DF39D8CDD87B96E565EF0 /* Pods-MyMoviesFRT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MyMoviesFRT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -545,6 +554,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.archil.MyMoviesFRT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -44,7 +44,7 @@ class DiscoveryRouter: MVVMRouter {
         baseViewController = baseVC
         
         let vc = DiscoveryVC.instantiateFromStoryboard(storyboardName: "Discovery", storyboardId: "DiscoveryVC")
-        let viewModel = DiscoveryVM.init(with: self, tmdbManager: dependencies.tmdbManager)
+        let viewModel = DiscoveryVM.init(with: self, tmdbManager: dependencies.tmdbManager, networkManager: dependencies.networkManager)
         vc.viewModel = viewModel
         
         switch presentationContext {
