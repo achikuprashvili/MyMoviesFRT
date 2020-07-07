@@ -13,6 +13,10 @@ import RxSwift
 
 protocol DiscoveryVMProtocol {
     func fetchDiscovery()
+    var networkIsReachable: BehaviorSubject<Bool> { get }
+    var screenState: BehaviorSubject<DiscoveryScreenState> { get }
+    var movies: PublishSubject<[Movie]> { get }
+    
 }
 
 class DiscoveryVM: MVVMViewModel {
@@ -20,6 +24,11 @@ class DiscoveryVM: MVVMViewModel {
     let router: MVVMRouter
     let tmdbManager: TMDBManagerProtocol
     let networkManager: NetworkManagerProtocol
+    
+    var networkIsReachable: BehaviorSubject<Bool> = BehaviorSubject<Bool>.init(value: false)
+    var screenState: BehaviorSubject<DiscoveryScreenState> = BehaviorSubject<DiscoveryScreenState>.init(value: .loading)
+    var movies: PublishSubject<[Movie]> = PublishSubject<[Movie]>()
+
     let disposeBag = DisposeBag()
     
     //==============================================================================
@@ -36,7 +45,7 @@ class DiscoveryVM: MVVMViewModel {
     
     private func initObservables() {
         networkManager.isReachable.subscribe(onNext: { (value) in
-            
+            self.networkIsReachable.onNext(value)
         }).disposed(by: disposeBag)
     }
 }
@@ -45,6 +54,8 @@ extension DiscoveryVM: DiscoveryVMProtocol {
     func fetchDiscovery() {
         tmdbManager.getDiscovery(page: 1, sortBy: .popularityAsc).subscribe(onNext: { (discovery) in
             print(discovery)
+            self.movies.onNext(discovery.results)
+            self.screenState.onNext(.discoveryMovies)
         }, onError: { (error) in
             print(error)
         }, onCompleted: {
@@ -53,4 +64,11 @@ extension DiscoveryVM: DiscoveryVMProtocol {
             print("disposed")
         }.disposed(by: disposeBag)
     }
+}
+
+enum DiscoveryScreenState {
+    case discoveryMovies
+    case favouriteMovies
+    case loading
+    case loadingMore
 }

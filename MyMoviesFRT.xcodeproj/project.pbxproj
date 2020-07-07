@@ -37,6 +37,12 @@
 		93AAA00C24B3DDDF00BB6BCD /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AAA00B24B3DDDF00BB6BCD /* AppDependencies.swift */; };
 		93AAA01724B3DEA400BB6BCD /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AAA01624B3DEA400BB6BCD /* UIViewController+Extension.swift */; };
 		93C2887324B420A00052A476 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2887224B420A00052A476 /* NetworkManager.swift */; };
+		93C2887A24B436950052A476 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2887824B436950052A476 /* MovieCollectionViewCell.swift */; };
+		93C2887B24B436950052A476 /* MovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C2887924B436950052A476 /* MovieCollectionViewCell.xib */; };
+		93C2887D24B452220052A476 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2887C24B452220052A476 /* UIColor+Extension.swift */; };
+		93C2888224B453E30052A476 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C2887F24B453E20052A476 /* OpenSans-Semibold.ttf */; };
+		93C2888324B453E30052A476 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C2888024B453E20052A476 /* OpenSans-Bold.ttf */; };
+		93C2888424B453E30052A476 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C2888124B453E30052A476 /* OpenSans-Regular.ttf */; };
 		D85694C5E59073AD2CBCD5A0 /* Pods_MyMoviesFRT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735F47667B80E2F768DB3E13 /* Pods_MyMoviesFRT.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +80,12 @@
 		93AAA00B24B3DDDF00BB6BCD /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		93AAA01624B3DEA400BB6BCD /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		93C2887224B420A00052A476 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		93C2887824B436950052A476 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		93C2887924B436950052A476 /* MovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCollectionViewCell.xib; sourceTree = "<group>"; };
+		93C2887C24B452220052A476 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		93C2887F24B453E20052A476 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		93C2888024B453E20052A476 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		93C2888124B453E30052A476 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		BE4DF39D8CDD87B96E565EF0 /* Pods-MyMoviesFRT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMoviesFRT.release.xcconfig"; path = "Target Support Files/Pods-MyMoviesFRT/Pods-MyMoviesFRT.release.xcconfig"; sourceTree = "<group>"; };
 		D88707FB41376B3506FDCFC8 /* Pods-MyMoviesFRT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMoviesFRT.debug.xcconfig"; path = "Target Support Files/Pods-MyMoviesFRT/Pods-MyMoviesFRT.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,6 +179,7 @@
 		93AA9FF924B3989E00BB6BCD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				93C2887E24B453C70052A476 /* Fonts */,
 				93AAA01524B3DE9000BB6BCD /* Extensions */,
 				93AA9FFA24B398BF00BB6BCD /* MVVMRBaseProtocols */,
 				93AAA00924B39C9F00BB6BCD /* Constants.swift */,
@@ -211,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				93AAA01624B3DEA400BB6BCD /* UIViewController+Extension.swift */,
+				93C2887C24B452220052A476 /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -222,8 +236,20 @@
 				9324BFB924B4032B002125BC /* DiscoveryRouter.swift */,
 				9324BFBA24B4032B002125BC /* DiscoveryVM.swift */,
 				9324BFBB24B4032B002125BC /* DiscoveryVC.swift */,
+				93C2887824B436950052A476 /* MovieCollectionViewCell.swift */,
+				93C2887924B436950052A476 /* MovieCollectionViewCell.xib */,
 			);
 			path = Discovery;
+			sourceTree = "<group>";
+		};
+		93C2887E24B453C70052A476 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				93C2888024B453E20052A476 /* OpenSans-Bold.ttf */,
+				93C2888124B453E30052A476 /* OpenSans-Regular.ttf */,
+				93C2887F24B453E20052A476 /* OpenSans-Semibold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		9D66526F64147F62756C6E44 /* Pods */ = {
@@ -303,9 +329,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93C2888224B453E30052A476 /* OpenSans-Semibold.ttf in Resources */,
+				93C2888324B453E30052A476 /* OpenSans-Bold.ttf in Resources */,
+				93C2887B24B436950052A476 /* MovieCollectionViewCell.xib in Resources */,
 				9356CD5824B391BA0039EF46 /* LaunchScreen.storyboard in Resources */,
 				9356CD5524B391BA0039EF46 /* Assets.xcassets in Resources */,
 				9324BFBC24B4032B002125BC /* Discovery.storyboard in Resources */,
+				93C2888424B453E30052A476 /* OpenSans-Regular.ttf in Resources */,
 				9371EFFF24B40E6E00D39F3F /* Movie.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +396,7 @@
 				9324BFBD24B4032B002125BC /* DiscoveryRouter.swift in Sources */,
 				93AAA00C24B3DDDF00BB6BCD /* AppDependencies.swift in Sources */,
 				93AAA00424B39AE500BB6BCD /* Coordinator.swift in Sources */,
+				93C2887D24B452220052A476 /* UIColor+Extension.swift in Sources */,
 				9324BFBF24B4032B002125BC /* DiscoveryVC.swift in Sources */,
 				9324BFAE24B3F392002125BC /* TMDBRequestRouter.swift in Sources */,
 				93AAA01724B3DEA400BB6BCD /* UIViewController+Extension.swift in Sources */,
@@ -383,6 +414,7 @@
 				93AA9FFE24B3992100BB6BCD /* MVVMRouter.swift in Sources */,
 				9356CD4B24B391B90039EF46 /* SceneDelegate.swift in Sources */,
 				9324BFB124B3F59E002125BC /* Movie.swift in Sources */,
+				93C2887A24B436950052A476 /* MovieCollectionViewCell.swift in Sources */,
 				9371F00724B4125C00D39F3F /* FavouriteMovieMOMovieMO+Extension.swift in Sources */,
 				9371F00124B40E6E00D39F3F /* MovieVM.swift in Sources */,
 			);
@@ -525,7 +557,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MyMoviesFRT/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -547,7 +579,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MyMoviesFRT/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
