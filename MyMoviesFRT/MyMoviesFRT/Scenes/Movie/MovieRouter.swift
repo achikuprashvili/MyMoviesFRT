@@ -48,7 +48,7 @@ class MovieRouter: MVVMRouter {
         switch presentationContext {
         
         case .fromDiscovery(let movie):
-            let viewModel = MovieVM.init(with: self)
+            let viewModel = MovieVM.init(with: self, movie: movie)
             vc.viewModel = viewModel
             nc.pushViewController(vc, animated: true)
         }
@@ -62,7 +62,7 @@ class MovieRouter: MVVMRouter {
             return
         }
         
-        guard let nc = baseViewController as? UINavigationController else {
+        guard let _ = baseViewController as? UINavigationController else {
             assertionFailure("The baseVC should be UINavigationController")
             return
         }

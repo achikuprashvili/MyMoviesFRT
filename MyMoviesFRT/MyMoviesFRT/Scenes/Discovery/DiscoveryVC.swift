@@ -13,7 +13,7 @@ import RxCocoa
 class DiscoveryVC: UIViewController, MVVMViewController {
     
     var viewModel: DiscoveryVMProtocol!
-    var moviesGridView: UICollectionView = UICollectionView(frame: .zero)
+//    var moviesGridView: UICollectionView = UICollectionView(frame: .zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()

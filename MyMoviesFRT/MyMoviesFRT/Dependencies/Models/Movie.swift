@@ -24,4 +24,14 @@ class Movie: Codable {
         case releaseDate = "release_date"
         case voteAverage = "vote_average"
     }
+    
+    init(movie: FavouriteMovieMO) {
+        title = movie.title ?? "N/A"
+        originalTitle = movie.originalTitle ?? "N/A"
+        id = Int(movie.id)
+        posterPath = movie.posterPath ?? "N/A"
+        releaseDate = movie.releaseDate ?? "N/A"
+        voteAverage = movie.voteAverage
+        overview = movie.overview ?? "N/A"
+    }
 }
