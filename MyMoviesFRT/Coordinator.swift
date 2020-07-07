@@ -13,7 +13,7 @@ class Coordinator {
     
     var dependencies: AppDependencies!
     var window: UIWindow?
-    var navigationController: UINavigationController
+    var navigationController: NavigationController
     
     //==============================================================================
     
@@ -21,7 +21,7 @@ class Coordinator {
         
         let backendManager = BackendManager()
         dependencies = AppDependencies(backendManager: backendManager)
-        navigationController = UINavigationController()
+        navigationController = NavigationController()
 
     }
     

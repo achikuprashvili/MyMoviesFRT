@@ -17,8 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up.on.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="rpx-q2-Hyq">
-                        <rect key="frame" x="0.0" y="-2.5" width="50" height="55"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rpx-q2-Hyq">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                     </imageView>
                 </subviews>
             </view>
@@ -30,10 +30,10 @@
                 <constraint firstAttribute="trailing" secondItem="rpx-q2-Hyq" secondAttribute="trailing" id="uHo-0Z-SA3"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="posterImage" destination="rpx-q2-Hyq" id="cu8-V3-gl0"/>
+            </connections>
             <point key="canvasLocation" x="139" y="85"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="square.and.arrow.up.on.square.fill" catalog="system" width="117" height="128"/>
-    </resources>
 </document>

@@ -18,4 +18,10 @@ extension UIViewController {
         let controller = storyboard.instantiateViewController(withIdentifier: storyboardId) as! T
         return controller
     }
+    
+    func addLogoToNavigationBar() {
+        let titleImage = UIImageView(image: UIImage(named: "LogoSmall"))
+        titleImage.contentMode = .center
+        self.navigationItem.titleView = titleImage
+    }
 }

@@ -11,4 +11,5 @@ target 'MyMoviesFRT' do
   pod 'RxCocoa', '~> 5'
   pod 'Alamofire'
   pod 'ReachabilitySwift'
+  pod 'SDWebImage'
 end

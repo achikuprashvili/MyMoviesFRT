@@ -32,13 +32,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY MOVIES APP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsK-fO-cNs">
-                                <rect key="frame" x="116.5" y="543" width="181" height="31.5"/>
+                                <rect key="frame" x="117.5" y="543" width="179" height="27"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="23"/>
                                 <color key="textColor" name="AppColorLightBlue"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="©Archil Kuprashvili" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JlP-JJ-atU">
-                                <rect key="frame" x="132" y="818.5" width="150.5" height="23.5"/>
+                                <rect key="frame" x="135" y="822" width="144.5" height="20"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                 <color key="textColor" name="AppColorLightGreen"/>
                                 <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="341.33334350585938" height="341.33334350585938"/>
+        <image name="Logo" width="26.666666030883789" height="26.666666030883789"/>
         <namedColor name="AppColorLightBlue">
             <color red="0.0039215686274509803" green="0.70588235294117652" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -16,6 +16,7 @@ protocol DiscoveryVMProtocol {
     var networkIsReachable: BehaviorSubject<Bool> { get }
     var screenState: BehaviorSubject<DiscoveryScreenState> { get }
     var movies: PublishSubject<[Movie]> { get }
+    func showMovieDetailScene(model: Movie)
     
 }
 
@@ -51,6 +52,10 @@ class DiscoveryVM: MVVMViewModel {
 }
 
 extension DiscoveryVM: DiscoveryVMProtocol {
+    func showMovieDetailScene(model: Movie) {
+        router.enqueueRoute(with: DiscoveryRouter.RouteType.showMovie(movie: model), animated: true, completion: nil)
+    }
+    
     func fetchDiscovery() {
         tmdbManager.getDiscovery(page: 1, sortBy: .popularityAsc).subscribe(onNext: { (discovery) in
             print(discovery)

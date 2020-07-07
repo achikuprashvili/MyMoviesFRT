@@ -43,6 +43,7 @@
 		93C2888224B453E30052A476 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C2887F24B453E20052A476 /* OpenSans-Semibold.ttf */; };
 		93C2888324B453E30052A476 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C2888024B453E20052A476 /* OpenSans-Bold.ttf */; };
 		93C2888424B453E30052A476 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C2888124B453E30052A476 /* OpenSans-Regular.ttf */; };
+		93C2888624B45A1E0052A476 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2888524B45A1E0052A476 /* NavigationController.swift */; };
 		D85694C5E59073AD2CBCD5A0 /* Pods_MyMoviesFRT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735F47667B80E2F768DB3E13 /* Pods_MyMoviesFRT.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		93C2887F24B453E20052A476 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		93C2888024B453E20052A476 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		93C2888124B453E30052A476 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		93C2888524B45A1E0052A476 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		BE4DF39D8CDD87B96E565EF0 /* Pods-MyMoviesFRT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMoviesFRT.release.xcconfig"; path = "Target Support Files/Pods-MyMoviesFRT/Pods-MyMoviesFRT.release.xcconfig"; sourceTree = "<group>"; };
 		D88707FB41376B3506FDCFC8 /* Pods-MyMoviesFRT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMoviesFRT.debug.xcconfig"; path = "Target Support Files/Pods-MyMoviesFRT/Pods-MyMoviesFRT.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +185,7 @@
 				93AAA01524B3DE9000BB6BCD /* Extensions */,
 				93AA9FFA24B398BF00BB6BCD /* MVVMRBaseProtocols */,
 				93AAA00924B39C9F00BB6BCD /* Constants.swift */,
+				93C2888524B45A1E0052A476 /* NavigationController.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				93AA9FFC24B3990B00BB6BCD /* MVVMViewModel.swift in Sources */,
 				93AAA00824B39B9000BB6BCD /* RequestRouter.swift in Sources */,
 				93AAA00624B39B4F00BB6BCD /* BackendManager.swift in Sources */,
+				93C2888624B45A1E0052A476 /* NavigationController.swift in Sources */,
 				93AA9FFE24B3992100BB6BCD /* MVVMRouter.swift in Sources */,
 				9356CD4B24B391B90039EF46 /* SceneDelegate.swift in Sources */,
 				9324BFB124B3F59E002125BC /* Movie.swift in Sources */,
@@ -484,7 +488,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -538,7 +542,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
