@@ -12,6 +12,7 @@ import UIKit
 class MovieRouter: MVVMRouter {
     
     enum PresentationContext {
+        case fromDiscovery(movie: Movie)
     }
     
     enum RouteType {
@@ -43,11 +44,13 @@ class MovieRouter: MVVMRouter {
         baseViewController = baseVC
         
         let vc = MovieVC.instantiateFromStoryboard(storyboardName: "Movie", storyboardId: "MovieVC")
-        let viewModel = MovieVM.init(with: self)
-        vc.viewModel = viewModel
         
         switch presentationContext {
         
+        case .fromDiscovery(let movie):
+            let viewModel = MovieVM.init(with: self)
+            vc.viewModel = viewModel
+            nc.pushViewController(vc, animated: true)
         }
     }
     

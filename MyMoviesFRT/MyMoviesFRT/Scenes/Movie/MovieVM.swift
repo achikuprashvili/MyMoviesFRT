@@ -17,11 +17,13 @@ protocol MovieVMProtocol {
 class MovieVM: MVVMViewModel {
     
     let router: MVVMRouter
+    let movie: Movie
     
     //==============================================================================
     
-    init(with router: MVVMRouter) {
+    init(with router: MVVMRouter, movie: Movie) {
         self.router = router
+        self.movie = movie
     }
     
     //==============================================================================

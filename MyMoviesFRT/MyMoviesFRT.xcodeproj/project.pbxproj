@@ -21,6 +21,10 @@
 		9356CD5324B391B90039EF46 /* MyMoviesFRT.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9356CD5124B391B90039EF46 /* MyMoviesFRT.xcdatamodeld */; };
 		9356CD5524B391BA0039EF46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9356CD5424B391BA0039EF46 /* Assets.xcassets */; };
 		9356CD5824B391BA0039EF46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9356CD5624B391BA0039EF46 /* LaunchScreen.storyboard */; };
+		9371EFFF24B40E6E00D39F3F /* Movie.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9371EFFB24B40E6E00D39F3F /* Movie.storyboard */; };
+		9371F00024B40E6E00D39F3F /* MovieRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9371EFFC24B40E6E00D39F3F /* MovieRouter.swift */; };
+		9371F00124B40E6E00D39F3F /* MovieVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9371EFFD24B40E6E00D39F3F /* MovieVM.swift */; };
+		9371F00224B40E6E00D39F3F /* MovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9371EFFE24B40E6E00D39F3F /* MovieVC.swift */; };
 		93AA9FFC24B3990B00BB6BCD /* MVVMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AA9FFB24B3990B00BB6BCD /* MVVMViewModel.swift */; };
 		93AA9FFE24B3992100BB6BCD /* MVVMRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AA9FFD24B3992100BB6BCD /* MVVMRouter.swift */; };
 		93AAA00024B3995900BB6BCD /* MVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AA9FFF24B3995900BB6BCD /* MVVMViewController.swift */; };
@@ -51,6 +55,10 @@
 		9356CD5424B391BA0039EF46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9356CD5724B391BA0039EF46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9356CD5924B391BA0039EF46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9371EFFB24B40E6E00D39F3F /* Movie.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Movie.storyboard; sourceTree = "<group>"; };
+		9371EFFC24B40E6E00D39F3F /* MovieRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRouter.swift; sourceTree = "<group>"; };
+		9371EFFD24B40E6E00D39F3F /* MovieVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVM.swift; sourceTree = "<group>"; };
+		9371EFFE24B40E6E00D39F3F /* MovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVC.swift; sourceTree = "<group>"; };
 		93AA9FFB24B3990B00BB6BCD /* MVVMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMViewModel.swift; sourceTree = "<group>"; };
 		93AA9FFD24B3992100BB6BCD /* MVVMRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMRouter.swift; sourceTree = "<group>"; };
 		93AA9FFF24B3995900BB6BCD /* MVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +138,17 @@
 			path = MyMoviesFRT;
 			sourceTree = "<group>";
 		};
+		9371EFFA24B40E3200D39F3F /* Movie */ = {
+			isa = PBXGroup;
+			children = (
+				9371EFFB24B40E6E00D39F3F /* Movie.storyboard */,
+				9371EFFC24B40E6E00D39F3F /* MovieRouter.swift */,
+				9371EFFD24B40E6E00D39F3F /* MovieVM.swift */,
+				9371EFFE24B40E6E00D39F3F /* MovieVC.swift */,
+			);
+			path = Movie;
+			sourceTree = "<group>";
+		};
 		93AA9FF924B3989E00BB6BCD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +184,7 @@
 		93AAA00224B39A7600BB6BCD /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				9371EFFA24B40E3200D39F3F /* Movie */,
 				93AAA01824B3DF2E00BB6BCD /* Discovery */,
 			);
 			path = Scenes;
@@ -269,6 +289,7 @@
 				9356CD5824B391BA0039EF46 /* LaunchScreen.storyboard in Resources */,
 				9356CD5524B391BA0039EF46 /* Assets.xcassets in Resources */,
 				9324BFBC24B4032B002125BC /* Discovery.storyboard in Resources */,
+				9371EFFF24B40E6E00D39F3F /* Movie.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +344,7 @@
 			files = (
 				9324BFBE24B4032B002125BC /* DiscoveryVM.swift in Sources */,
 				9324BFB324B3FD21002125BC /* Discovery.swift in Sources */,
+				9371F00024B40E6E00D39F3F /* MovieRouter.swift in Sources */,
 				9324BFBD24B4032B002125BC /* DiscoveryRouter.swift in Sources */,
 				93AAA00C24B3DDDF00BB6BCD /* AppDependencies.swift in Sources */,
 				93AAA00424B39AE500BB6BCD /* Coordinator.swift in Sources */,
@@ -335,12 +357,14 @@
 				9356CD5324B391B90039EF46 /* MyMoviesFRT.xcdatamodeld in Sources */,
 				93AAA00024B3995900BB6BCD /* MVVMViewController.swift in Sources */,
 				9356CD4924B391B90039EF46 /* AppDelegate.swift in Sources */,
+				9371F00224B40E6E00D39F3F /* MovieVC.swift in Sources */,
 				93AA9FFC24B3990B00BB6BCD /* MVVMViewModel.swift in Sources */,
 				93AAA00824B39B9000BB6BCD /* RequestRouter.swift in Sources */,
 				93AAA00624B39B4F00BB6BCD /* BackendManager.swift in Sources */,
 				93AA9FFE24B3992100BB6BCD /* MVVMRouter.swift in Sources */,
 				9356CD4B24B391B90039EF46 /* SceneDelegate.swift in Sources */,
 				9324BFB124B3F59E002125BC /* Movie.swift in Sources */,
+				9371F00124B40E6E00D39F3F /* MovieVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

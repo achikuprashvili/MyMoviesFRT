@@ -16,7 +16,7 @@ class DiscoveryRouter: MVVMRouter {
     }
     
     enum RouteType {
-        
+        case showMovie(movie: Movie)
     }
     
     weak var baseViewController: UIViewController?
@@ -69,6 +69,10 @@ class DiscoveryRouter: MVVMRouter {
         
         switch routeType {
             
+        case .showMovie(let movie):
+            let movieRouter = MovieRouter(dependencies: dependencies)
+            let presentationContext = MovieRouter.PresentationContext.fromDiscovery(movie: movie)
+            movieRouter.present(on: nc, animated: animated, context: presentationContext, completion: nil)
         }
     }
     
