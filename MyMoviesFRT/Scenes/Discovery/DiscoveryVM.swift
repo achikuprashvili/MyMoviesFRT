@@ -13,13 +13,19 @@ import RxSwift
 
 protocol DiscoveryVMProtocol {
     func fetchDiscovery()
-    var networkIsReachable: BehaviorSubject<Bool> { get }
-    var screenState: BehaviorSubject<DiscoveryScreenState> { get }
-    var movies: PublishSubject<[Movie]> { get }
     func showMovieDetailScene(model: Movie)
     func showFavoriteMovies()
     func showDiscoveryMovies()
+    func setFilter(filter: MovieFilter)
+    func loadMore()
     
+    var networkIsReachable: BehaviorSubject<Bool> { get }
+    var movies: PublishSubject<[Movie]> { get }
+    var showActivityIndicator: BehaviorSubject<Bool> { get }
+    var showEmptyScreenPlaceholder: BehaviorSubject<Bool> { get }
+    var showNoNetworkPlaceholder: BehaviorSubject<Bool> { get }
+    var movieFilter: MovieFilter { get }
+    var handleError: PublishSubject<Error> { get }
 }
 
 class DiscoveryVM: MVVMViewModel {
@@ -28,12 +34,21 @@ class DiscoveryVM: MVVMViewModel {
     let tmdbManager: TMDBManagerProtocol
     let networkManager: NetworkManagerProtocol
     let dataManager: DataManagerProtocol
-    
+    var movieFilter: MovieFilter = MovieFilter()
     var networkIsReachable: BehaviorSubject<Bool> = BehaviorSubject<Bool>.init(value: false)
-    var screenState: BehaviorSubject<DiscoveryScreenState> = BehaviorSubject<DiscoveryScreenState>.init(value: .loading)
+    var showActivityIndicator: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
+    var showEmptyScreenPlaceholder: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
+    var showNoNetworkPlaceholder: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
     var movies: PublishSubject<[Movie]> = PublishSubject<[Movie]>()
+    var handleError: PublishSubject<Error> = PublishSubject<Error>()
+    
+    private var isLoading: Bool = false
+    private var page: Int = 1
+    private var discoveryMovies: [Movie] = []
+    private var selectedSegment: Int = 0
 
     let disposeBag = DisposeBag()
+
     
     //==============================================================================
     
@@ -50,18 +65,25 @@ class DiscoveryVM: MVVMViewModel {
     
     private func initObservables() {
         networkManager.isReachable.subscribe(onNext: { (value) in
-            self.networkIsReachable.onNext(value)
+            self.showNoNetworkPlaceholder.onNext(!value)
         }).disposed(by: disposeBag)
     }
 }
 
 extension DiscoveryVM: DiscoveryVMProtocol {
+    func setFilter(filter: MovieFilter) {
+        self.movieFilter = filter
+    }
+    
     func showFavoriteMovies() {
-        self.movies.onNext(dataManager.getAllFavouriteMovies())
-        screenState.onNext(.favouriteMovies)
+        selectedSegment = 1
+        let moviesToShow = dataManager.getAllFavouriteMovies()
+        self.movies.onNext(moviesToShow)
+        self.showEmptyScreenPlaceholder.onNext(moviesToShow.count == 0)
     }
     
     func showDiscoveryMovies() {
+        selectedSegment = 0
         fetchDiscovery()
     }
     
@@ -70,24 +92,39 @@ extension DiscoveryVM: DiscoveryVMProtocol {
     }
     
     func fetchDiscovery() {
-        tmdbManager.getDiscovery(page: 1, sortBy: .popularityAsc).subscribe(onNext: { (discovery) in
-            print(discovery)
-            self.movies.onNext(discovery.results)
-            self.screenState.onNext(.discoveryMovies)
+        if isLoading {
+            return
+        }
+        discoveryMovies = []
+        getDiscovery(page: 1, filter: movieFilter)
+    }
+    
+    func loadMore() {
+        if isLoading {
+            return
+        }
+        getDiscovery(page: page + 1, filter: movieFilter)
+    }
+    
+    func getDiscovery(page: Int, filter: MovieFilter) {
+        isLoading = true
+        showActivityIndicator.onNext(isLoading)
+        tmdbManager.getDiscovery(page: page , sortBy: filter.sortBy).subscribe(onNext: { (discovery) in
+            self.isLoading = false
+            self.discoveryMovies.append(contentsOf: discovery.results)
+            self.movies.onNext(self.discoveryMovies)
+            self.page = discovery.page
+            self.showEmptyScreenPlaceholder.onNext(self.discoveryMovies.count == 0)
+            self.showActivityIndicator.onNext(self.isLoading)
         }, onError: { (error) in
-            print(error)
+            self.isLoading = false
+            self.handleError.onNext(error)
+            self.showEmptyScreenPlaceholder.onNext(self.discoveryMovies.count == 0)
+            self.showActivityIndicator.onNext(self.isLoading)
         }, onCompleted: {
-            print("completed")
+
         }) {
-            print("disposed")
+
         }.disposed(by: disposeBag)
     }
-}
-
-enum DiscoveryScreenState {
-    case discoveryMovies
-    case favouriteMovies
-    case loading
-    case loadingMore
-    case empty
 }

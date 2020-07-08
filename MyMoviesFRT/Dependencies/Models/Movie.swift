@@ -12,7 +12,7 @@ class Movie: Codable {
     var title: String
     var originalTitle: String
     var overview: String
-    var posterPath: String
+    var posterPath: String?
     var releaseDate: String
     var voteAverage: Double
     var id: Int

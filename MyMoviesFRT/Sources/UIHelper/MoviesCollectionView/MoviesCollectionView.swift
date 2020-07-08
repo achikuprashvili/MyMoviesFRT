@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import RxSwift
 
 class MoviesCollectionView: UICollectionView {
+    
+    var loadMore = PublishSubject<Void>.init()
+    let disposeBag = DisposeBag()
     
     init(frame: CGRect) {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1))
@@ -25,6 +29,17 @@ class MoviesCollectionView: UICollectionView {
         self.backgroundColor = UIColor.AppColor.lightBlue
         self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: MovieCollectionViewCell.reuseIdentifier)
+        self.rx
+            .contentOffset
+            .subscribe(onNext: { (point) in
+                let offsetY = point.y
+                let contentHeight = self.contentSize.height
+                if offsetY > contentHeight - self.frame.size.height {
+                    self.loadMore.onNext(())
+                }
+            }, onError: nil, onCompleted: nil, onDisposed: nil
+        ).disposed(by: disposeBag)
+
     }
 
     required init?(coder: NSCoder) {
@@ -41,15 +56,7 @@ class MoviesCollectionView: UICollectionView {
         group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
     
         let section = NSCollectionLayoutSection(group: group)
+        
         return UICollectionViewCompositionalLayout(section: section)
     }
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }

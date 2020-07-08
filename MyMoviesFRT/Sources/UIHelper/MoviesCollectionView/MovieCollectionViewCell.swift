@@ -23,7 +23,15 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func config(movie: Movie) {
         self.movie = movie
-        self.posterImage.sd_setImage(with: URL(string: Constants.imageBaseUrl + "/w500" + movie.posterPath), completed: nil)
+        self.posterImage.contentMode = .center
+        self.posterImage.sd_setImage(with: URL(string: Constants.imageBaseUrl + "/w500" + (movie.posterPath ?? " ")), placeholderImage: UIImage(named: "imagePlaceholder")?.withTintColor(UIColor.AppColor.darkBlue), options: SDWebImageOptions.retryFailed) { (image, error, cache, url) in
+            guard image != nil else {
+                self.posterImage.contentMode = .center
+                return
+            }
+            self.posterImage.contentMode = .scaleAspectFill
+        }
+        
     }
 
 }

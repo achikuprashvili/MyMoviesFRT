@@ -30,7 +30,7 @@ enum TMDBRequestRouter: RequestRouter {
     var parameters: Parameters {
         switch self {
         case .getDiscovery(let page, let sortBy):
-            return ["api_key": Constants.tmdbApiKey, "page": page, "sortBy": sortBy.rawValue]
+            return ["api_key": Constants.tmdbApiKey, "page": page, "sort_by": sortBy.rawValue]
         }
     }
 }

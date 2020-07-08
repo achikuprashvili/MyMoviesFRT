@@ -14,32 +14,41 @@ class DiscoveryVC: UIViewController, MVVMViewController {
     
     var viewModel: DiscoveryVMProtocol!
     let disposeBag = DisposeBag()
+    lazy var filterView: FilterView = {
+        let filterView = FilterView(frame: self.view.bounds)
+        return filterView
+    }()
+    
     @IBOutlet weak var moviewSectionSegmentControll: UISegmentedControl!
     
-    var collectionView: UICollectionView!
+    var collectionView: MoviesCollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addLogoToNavigationBar()
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "square.grid.2x2.fill"), for: .normal)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
-        
-        button.rx.tap.bind {
-            print("tap button")
-        }.disposed(by: disposeBag)
+        viewModel.fetchDiscovery()
         setupUI()
         initCollectionView()
+        bindCollectionViewToViewModel()
         initObservables()
     }
     
     func setupUI() {
         self.view.backgroundColor = UIColor.AppColor.lightBlue
+        addLogoToNavigationBar()
+        
+        let button = UIButton()
+        button.setImage(UIImage(named: "filter")?.withTintColor(UIColor.AppColor.lightGreen), for: .normal)
+        button.rx.tap.bind {
+            self.addFilterView()
+        }.disposed(by: disposeBag)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
+        
         moviewSectionSegmentControll.setTitle("Discovery", forSegmentAt: 0)
         moviewSectionSegmentControll.setTitle("Favorites", forSegmentAt: 1)
         moviewSectionSegmentControll.selectedSegmentTintColor = UIColor.AppColor.lightGreen
         moviewSectionSegmentControll.tintColor = UIColor.white
+        
         moviewSectionSegmentControll
             .rx
             .controlEvent(.valueChanged)
@@ -47,14 +56,17 @@ class DiscoveryVC: UIViewController, MVVMViewController {
                 switch self.moviewSectionSegmentControll.selectedSegmentIndex {
                 case 0:
                     self.viewModel.showDiscoveryMovies()
+                    self.navigationItem.rightBarButtonItem?.isEnabled = true
                 case 1:
                     self.viewModel.showFavoriteMovies()
+                    self.navigationItem.rightBarButtonItem?.isEnabled = false
                 default:
                     break
                 }
             }, onError: { (error) in
             }, onCompleted: nil
-            , onDisposed: nil).disposed(by: disposeBag)
+            , onDisposed: nil
+        ).disposed(by: disposeBag)
     }
     
     func initCollectionView() {
@@ -65,7 +77,9 @@ class DiscoveryVC: UIViewController, MVVMViewController {
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: moviewSectionSegmentControll.bottomAnchor, constant: 15).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
+    }
+    
+    func bindCollectionViewToViewModel() {
         viewModel
             .movies
             .bind(to: collectionView.rx.items(cellIdentifier: MovieCollectionViewCell.reuseIdentifier)) { index, movie, cell in
@@ -80,22 +94,91 @@ class DiscoveryVC: UIViewController, MVVMViewController {
                 self.viewModel.showMovieDetailScene(model: movie)
             }, onError: nil, onCompleted: nil, onDisposed: nil
         ).disposed(by: disposeBag)
+        
+        collectionView
+            .loadMore
+            .bind { () in
+                if self.moviewSectionSegmentControll.selectedSegmentIndex == 0 {
+                    self.viewModel.loadMore()
+                }
+        }.disposed(by: disposeBag)
     }
     
+    func setFilterViewObserver() {
+        filterView
+            .filterDidApply
+            .subscribe(onNext: { (filter) in
+                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                self.viewModel.setFilter(filter: filter)
+                self.viewModel.fetchDiscovery()
+            }, onError: nil, onCompleted: nil, onDisposed: nil
+        ).disposed(by: disposeBag)
+    }
     
-    func initObservables() {
+    func setActivityIndicatorObserver() {
         viewModel
-            .networkIsReachable
+            .showActivityIndicator
             .subscribeOn(MainScheduler.asyncInstance)
             .bind { (value) in
-                print("network is \(value)")
+                self.showActivitiIndicator(value: value)
         }.disposed(by: disposeBag)
-        
+    }
+    
+    func setErrorHandlerObserver() {
         viewModel
-            .screenState
-            .subscribeOn(MainScheduler.asyncInstance)
-            .bind { (state) in
-                print(state)
+            .handleError
+            .bind{ error in
+                self.handleError(error)
         }.disposed(by: disposeBag)
+    }
+    
+    func setNetworkConnectionObserver() {
+        viewModel
+            .showNoNetworkPlaceholder
+            .subscribeOn(MainScheduler.asyncInstance)
+            .bind { (value) in
+                self.showPlaceholder(placehodlerType: .noNetworkConnection, value: value)
+        }.disposed(by: disposeBag)
+    }
+    
+    func setEmptyScreenObserver() {
+        viewModel
+            .showEmptyScreenPlaceholder
+            .subscribeOn(MainScheduler.asyncInstance)
+            .bind { (value) in
+                self.showPlaceholder(placehodlerType: .noMovies, value: value)
+        }.disposed(by: disposeBag)
+
+    }
+    
+    func initObservables() {
+        setFilterViewObserver()
+        setActivityIndicatorObserver()
+        setErrorHandlerObserver()
+        setNetworkConnectionObserver()
+        setEmptyScreenObserver()
+    }
+    
+    func addFilterView() {
+        if view.subviews.contains(filterView) {
+            filterView.removeFromSuperview()
+            return
+        }
+        
+        filterView.config(with: viewModel.movieFilter)
+        self.view.addSubview(filterView)
+        filterView.translatesAutoresizingMaskIntoConstraints = false
+        filterView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        filterView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        filterView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        filterView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    func handleError(_ error: Error) {
+        let alert = UIAlertController(title: "", message: error.localizedDescription, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { (action) in
+            self.viewModel.loadMore()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }

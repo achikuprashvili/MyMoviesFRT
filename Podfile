@@ -12,4 +12,5 @@ target 'MyMoviesFRT' do
   pod 'Alamofire'
   pod 'ReachabilitySwift'
   pod 'SDWebImage'
+  pod 'MaterialComponents/ActivityIndicator'
 end
