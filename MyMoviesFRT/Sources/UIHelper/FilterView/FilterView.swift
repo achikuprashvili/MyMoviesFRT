@@ -11,9 +11,24 @@ import RxSwift
 import RangeSeekSlider
 
 class FilterView: UIView {
+    
     var sortByDataSource = PublishSubject<[MovieSortOptions]>.init()
     let disposeBag = DisposeBag()
     var filterDidApply = PublishSubject<MovieFilter>.init()
+    
+    var contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return UIScrollView()
+    }()
     
     let separatorLine: UIView = {
         let view = UIView()
@@ -92,12 +107,31 @@ class FilterView: UIView {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.AppColor.darkBlue
+        addApplyButton()
+        addScrollView()
         addSortByTitle()
         addTableView()
-        addApplyButton()
         addSeparatorLine()
         addUserScoreTitle()
         addRateSlider()
+    }
+    
+    func addScrollView() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(scrollView)
+        scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: applyButton.topAnchor, constant: -20).isActive = true
+        scrollView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        
+        scrollView.addSubview(contentView)
+        contentView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
     }
     
     func config(with filter: MovieFilter) {
@@ -106,6 +140,8 @@ class FilterView: UIView {
             return
         }
         sortByTableView.selectRow(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: .none)
+        rateSlider.selectedMaxValue = CGFloat(filter.maxRating)
+        rateSlider.selectedMinValue = CGFloat(filter.minRating)
     }
     
     required init?(coder: NSCoder) {
@@ -113,23 +149,23 @@ class FilterView: UIView {
     }
     
     func addSortByTitle() {
-        addSubview(sortByTitle)
-        sortByTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
-        sortByTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
-        sortByTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
+        contentView.addSubview(sortByTitle)
+        sortByTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25).isActive = true
+        sortByTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15).isActive = true
+        sortByTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
     }
     
     func addUserScoreTitle() {
-        addSubview(userScoreTitle)
-        userScoreTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
+        contentView.addSubview(userScoreTitle)
+        userScoreTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25).isActive = true
         userScoreTitle.topAnchor.constraint(equalTo: separatorLine.bottomAnchor, constant: 15).isActive = true
-        userScoreTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
+        userScoreTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
     }
     
     func addTableView() {
-        self.addSubview(sortByTableView)
-        sortByTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        sortByTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        contentView.addSubview(sortByTableView)
+        sortByTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        sortByTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         sortByTableView.topAnchor.constraint(equalTo: sortByTitle.bottomAnchor).isActive = true
         sortByTableView.heightAnchor.constraint(equalToConstant: CGFloat(MovieSortOptions.allCases.count * 40)).isActive = true
         
@@ -165,19 +201,20 @@ class FilterView: UIView {
     }
     
     func addSeparatorLine() {
-        addSubview(separatorLine)
-        separatorLine.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
-        separatorLine.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+        contentView.addSubview(separatorLine)
+        separatorLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
+        separatorLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
         separatorLine.topAnchor.constraint(equalTo: sortByTableView.bottomAnchor, constant: 15).isActive = true
         separatorLine.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
     
     func addRateSlider() {
-        addSubview(rateSlider)
-        rateSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
-        rateSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+        contentView.addSubview(rateSlider)
+        rateSlider.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
+        rateSlider.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
         rateSlider.topAnchor.constraint(equalTo: userScoreTitle.bottomAnchor, constant: 5).isActive = true
         rateSlider.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        rateSlider.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40).isActive = true
     }
     
     /*
