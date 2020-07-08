@@ -48,7 +48,7 @@ class MovieRouter: MVVMRouter {
         switch presentationContext {
         
         case .fromDiscovery(let movie):
-            let viewModel = MovieVM.init(with: self, movie: movie)
+            let viewModel = MovieVM.init(with: self, movie: movie, dataManager: dependencies.dataManager)
             vc.viewModel = viewModel
             nc.pushViewController(vc, animated: true)
         }

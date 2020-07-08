@@ -11,9 +11,11 @@ import Foundation
 struct AppDependencies {
     var tmdbManager: TMDBManagerProtocol
     var networkManager: NetworkManagerProtocol
+    var dataManager: DataManagerProtocol
     
     init(backendManager: BackendManager) {
         self.tmdbManager = TMDBManager(backendManager: backendManager)
         self.networkManager = NetworkManager()
+        self.dataManager = DataManager()
     }
 }

@@ -17,6 +17,8 @@ protocol DiscoveryVMProtocol {
     var screenState: BehaviorSubject<DiscoveryScreenState> { get }
     var movies: PublishSubject<[Movie]> { get }
     func showMovieDetailScene(model: Movie)
+    func showFavoriteMovies()
+    func showDiscoveryMovies()
     
 }
 
@@ -25,6 +27,7 @@ class DiscoveryVM: MVVMViewModel {
     let router: MVVMRouter
     let tmdbManager: TMDBManagerProtocol
     let networkManager: NetworkManagerProtocol
+    let dataManager: DataManagerProtocol
     
     var networkIsReachable: BehaviorSubject<Bool> = BehaviorSubject<Bool>.init(value: false)
     var screenState: BehaviorSubject<DiscoveryScreenState> = BehaviorSubject<DiscoveryScreenState>.init(value: .loading)
@@ -34,10 +37,11 @@ class DiscoveryVM: MVVMViewModel {
     
     //==============================================================================
     
-    init(with router: MVVMRouter, tmdbManager: TMDBManagerProtocol, networkManager: NetworkManagerProtocol) {
+    init(with router: MVVMRouter, tmdbManager: TMDBManagerProtocol, networkManager: NetworkManagerProtocol, dataManager: DataManagerProtocol) {
         self.router = router
         self.tmdbManager = tmdbManager
         self.networkManager = networkManager
+        self.dataManager = dataManager
         initObservables()
         fetchDiscovery()
     }
@@ -52,6 +56,15 @@ class DiscoveryVM: MVVMViewModel {
 }
 
 extension DiscoveryVM: DiscoveryVMProtocol {
+    func showFavoriteMovies() {
+        self.movies.onNext(dataManager.getAllFavouriteMovies())
+        screenState.onNext(.favouriteMovies)
+    }
+    
+    func showDiscoveryMovies() {
+        fetchDiscovery()
+    }
+    
     func showMovieDetailScene(model: Movie) {
         router.enqueueRoute(with: DiscoveryRouter.RouteType.showMovie(movie: model), animated: true, completion: nil)
     }
@@ -76,4 +89,5 @@ enum DiscoveryScreenState {
     case favouriteMovies
     case loading
     case loadingMore
+    case empty
 }

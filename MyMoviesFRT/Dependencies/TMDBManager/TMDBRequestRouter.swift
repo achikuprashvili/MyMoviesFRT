@@ -34,10 +34,3 @@ enum TMDBRequestRouter: RequestRouter {
         }
     }
 }
-
-enum MovieSortOptions: String {
-    case popularityAsc = "popularity.asc"
-    case popularityDesc = "popularity.desc"
-    case ratingAsc = "vote_average.asc"
-    case ratingDesc = "vote_average.desc"
-}

@@ -18,12 +18,15 @@ class MovieVM: MVVMViewModel {
     
     let router: MVVMRouter
     let movie: Movie
+    let dataManager: DataManagerProtocol
     
     //==============================================================================
     
-    init(with router: MVVMRouter, movie: Movie) {
+    init(with router: MVVMRouter, movie: Movie, dataManager: DataManagerProtocol) {
         self.router = router
         self.movie = movie
+        self.dataManager = dataManager
+        dataManager.saveMovieAs(favourite: movie)
     }
     
     //==============================================================================

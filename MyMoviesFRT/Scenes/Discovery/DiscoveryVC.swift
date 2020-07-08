@@ -14,6 +14,7 @@ class DiscoveryVC: UIViewController, MVVMViewController {
     
     var viewModel: DiscoveryVMProtocol!
     let disposeBag = DisposeBag()
+    @IBOutlet weak var moviewSectionSegmentControll: UISegmentedControl!
     
     var collectionView: UICollectionView!
     
@@ -28,26 +29,48 @@ class DiscoveryVC: UIViewController, MVVMViewController {
         button.rx.tap.bind {
             print("tap button")
         }.disposed(by: disposeBag)
-        
+        setupUI()
         initCollectionView()
         initObservables()
     }
     
+    func setupUI() {
+        self.view.backgroundColor = UIColor.AppColor.lightBlue
+        moviewSectionSegmentControll.setTitle("Discovery", forSegmentAt: 0)
+        moviewSectionSegmentControll.setTitle("Favorites", forSegmentAt: 1)
+        moviewSectionSegmentControll.selectedSegmentTintColor = UIColor.AppColor.lightGreen
+        moviewSectionSegmentControll.tintColor = UIColor.white
+        moviewSectionSegmentControll
+            .rx
+            .controlEvent(.valueChanged)
+            .subscribe(onNext: { () in
+                switch self.moviewSectionSegmentControll.selectedSegmentIndex {
+                case 0:
+                    self.viewModel.showDiscoveryMovies()
+                case 1:
+                    self.viewModel.showFavoriteMovies()
+                default:
+                    break
+                }
+            }, onError: { (error) in
+            }, onCompleted: nil
+            , onDisposed: nil).disposed(by: disposeBag)
+    }
+    
     func initCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
-        collectionView.backgroundColor = UIColor.AppColor.lightBlue
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: MovieCollectionViewCell.reuseIdentifier)
+        collectionView = MoviesCollectionView(frame: view.bounds)
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: moviewSectionSegmentControll.bottomAnchor, constant: 15).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        viewModel.movies.bind(to: collectionView.rx.items(cellIdentifier: MovieCollectionViewCell.reuseIdentifier)) { index, movie, cell in
-            let cellToUse = cell as! MovieCollectionViewCell
-            cellToUse.config(movie: movie)
+        viewModel
+            .movies
+            .bind(to: collectionView.rx.items(cellIdentifier: MovieCollectionViewCell.reuseIdentifier)) { index, movie, cell in
+                let cellToUse = cell as! MovieCollectionViewCell
+                cellToUse.config(movie: movie)
         }.disposed(by: disposeBag)
         
         collectionView
@@ -55,23 +78,10 @@ class DiscoveryVC: UIViewController, MVVMViewController {
             .modelSelected(Movie.self)
             .subscribe(onNext: { (movie) in
                 self.viewModel.showMovieDetailScene(model: movie)
-            }, onError: { (error) in
-            
-            }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            }, onError: nil, onCompleted: nil, onDisposed: nil
+        ).disposed(by: disposeBag)
     }
     
-    func createCollectionViewLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-        let height = (view.bounds.width - 24) * 0.75 + 16
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-    
-        let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
-    }
     
     func initObservables() {
         viewModel
@@ -88,5 +98,4 @@ class DiscoveryVC: UIViewController, MVVMViewController {
                 print(state)
         }.disposed(by: disposeBag)
     }
-    
 }

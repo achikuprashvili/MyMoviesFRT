@@ -38,7 +38,7 @@ class DataManager: DataManagerProtocol {
     private func getFavoriteMovie(with id: Int) -> FavouriteMovieMO? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntityNames.FavouriteMovieMO.rawValue)
         let fetchContext = persistentContainer.viewContext
-        let predicate = NSPredicate(format: "id == %@", id)
+        let predicate = NSPredicate(format: "id == %i", id)
         fetchRequest.predicate = predicate
         do {
             let movies = try fetchContext.fetch(fetchRequest) as! [FavouriteMovieMO]
@@ -53,7 +53,7 @@ extension DataManager {
     func saveMovieAs(favourite: Movie) {
         let context = persistentContainer.newBackgroundContext()
         context.performAndWait {
-            let movieMo = NSEntityDescription.insertNewObject(forEntityName: CoreDataEntityNames.FavouriteMovieMO.rawValue, into: context) as! FavouriteMovieMO
+            let movieMo = getFavoriteMovie(with: favourite.id) ?? NSEntityDescription.insertNewObject(forEntityName: CoreDataEntityNames.FavouriteMovieMO.rawValue, into: context) as! FavouriteMovieMO
             movieMo.updateDate(from: favourite)
             context.saveContext()
         }
