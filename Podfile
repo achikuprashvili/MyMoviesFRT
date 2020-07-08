@@ -9,8 +9,9 @@ target 'MyMoviesFRT' do
   # Pods for MyMoviesFRT
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'
-  pod 'Alamofire'
-  pod 'ReachabilitySwift'
-  pod 'SDWebImage'
-  pod 'MaterialComponents/ActivityIndicator'
+  pod 'Alamofire', '~> 5.2.1'
+  pod 'ReachabilitySwift', '5.0.0'
+  pod 'SDWebImage', '~> 5.8.3'
+  pod 'MaterialComponents/ActivityIndicator', '~> 110.2.0'
+  pod 'RangeSeekSlider'
 end

@@ -10,11 +10,11 @@ import Foundation
 import RxSwift
 
 protocol TMDBManagerBMProtocol: class {
-    func getDiscovery(page: Int, sortBy: MovieSortOptions) -> Observable<Discovery>
+    func getDiscovery(page: Int, filter: MovieFilter) -> Observable<Discovery>
 }
 
 extension BackendManager: TMDBManagerBMProtocol {
-    func getDiscovery(page: Int, sortBy: MovieSortOptions) -> Observable<Discovery> {
-        return decodableRequest(TMDBRequestRouter.getDiscovery(page: page, sortBy: sortBy))
+    func getDiscovery(page: Int, filter: MovieFilter) -> Observable<Discovery> {
+        return decodableRequest(TMDBRequestRouter.getDiscovery(page: page, filter: filter))
     }
 }

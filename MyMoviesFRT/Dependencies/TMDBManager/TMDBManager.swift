@@ -11,7 +11,7 @@ import RxSwift
 
 protocol TMDBManagerProtocol: class {
     init(backendManager: TMDBManagerBMProtocol)
-    func getDiscovery(page: Int, sortBy: MovieSortOptions) -> Observable<Discovery>
+    func getDiscovery(page: Int, filter: MovieFilter) -> Observable<Discovery>
 }
 
 class TMDBManager: TMDBManagerProtocol {
@@ -24,7 +24,7 @@ class TMDBManager: TMDBManagerProtocol {
 }
 
 extension TMDBManager {
-    func getDiscovery(page: Int, sortBy: MovieSortOptions) -> Observable<Discovery> {
-        return backendManager.getDiscovery(page: page, sortBy: sortBy)
+    func getDiscovery(page: Int, filter: MovieFilter) -> Observable<Discovery> {
+        return backendManager.getDiscovery(page: page, filter: filter)
     }
 }

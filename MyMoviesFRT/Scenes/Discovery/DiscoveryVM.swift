@@ -109,7 +109,7 @@ extension DiscoveryVM: DiscoveryVMProtocol {
     func getDiscovery(page: Int, filter: MovieFilter) {
         isLoading = true
         showActivityIndicator.onNext(isLoading)
-        tmdbManager.getDiscovery(page: page , sortBy: filter.sortBy).subscribe(onNext: { (discovery) in
+        tmdbManager.getDiscovery(page: page, filter: filter).subscribe(onNext: { (discovery) in
             self.isLoading = false
             self.discoveryMovies.append(contentsOf: discovery.results)
             self.movies.onNext(self.discoveryMovies)

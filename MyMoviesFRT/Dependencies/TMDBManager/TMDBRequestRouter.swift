@@ -11,7 +11,7 @@ import Alamofire
 
 enum TMDBRequestRouter: RequestRouter {
     
-    case getDiscovery(page: Int, sortBy: MovieSortOptions)
+    case getDiscovery(page: Int, filter: MovieFilter)
     
     var method: HTTPMethod {
         switch self {
@@ -29,8 +29,8 @@ enum TMDBRequestRouter: RequestRouter {
     
     var parameters: Parameters {
         switch self {
-        case .getDiscovery(let page, let sortBy):
-            return ["api_key": Constants.tmdbApiKey, "page": page, "sort_by": sortBy.rawValue]
+        case .getDiscovery(let page, let filter):
+            return ["api_key": Constants.tmdbApiKey, "page": page, "sort_by": filter.sortBy.rawValue, "vote_average.gte": filter.minRating, "vote_average.lte": filter.maxRating]
         }
     }
 }

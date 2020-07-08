@@ -13,7 +13,7 @@ extension UIFont {
     struct AppFonts {
         static let openSansBold = "OpenSans-Bold"
         static let openSansSemibold = "OpenSans-Semibold"
-        static let openSansRegular = "OpenSans-Regular"
+        static let openSansRegular = "OpenSans"
         
         static func openSansBold(with size: CGFloat) -> UIFont {
             return UIFont(name: UIFont.AppFonts.openSansBold, size: size)!

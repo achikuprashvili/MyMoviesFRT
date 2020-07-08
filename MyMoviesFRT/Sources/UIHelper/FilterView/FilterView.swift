@@ -8,9 +8,9 @@
 
 import UIKit
 import RxSwift
+import RangeSeekSlider
 
 class FilterView: UIView {
-    
     var sortByDataSource = PublishSubject<[MovieSortOptions]>.init()
     let disposeBag = DisposeBag()
     var filterDidApply = PublishSubject<MovieFilter>.init()
@@ -41,6 +41,16 @@ class FilterView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    lazy var userScoreTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Rating"
+        label.textColor = UIColor.AppColor.lightBlue
+        label.font = UIFont.AppFonts.openSansSemibold(with: 18)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
  
     lazy var applyButton: UIButton = {
         let button = UIButton()
@@ -53,6 +63,29 @@ class FilterView: UIView {
         return button
     }()
     
+    var rateSlider: RangeSeekSlider = {
+        let slider = RangeSeekSlider()
+        slider.minValue = 0
+        slider.selectedMaxValue = 0
+        slider.maxValue = 10
+        slider.selectedMaxValue = 10
+        slider.enableStep = true
+        slider.step = 0.1
+        slider.lineHeight = 3
+        slider.colorBetweenHandles = UIColor.AppColor.lightGreen
+        slider.handleColor = UIColor.AppColor.lightGreen
+        slider.maxLabelColor = UIColor.AppColor.lightGreen
+        slider.minLabelColor = UIColor.AppColor.lightGreen
+        slider.maxLabelFont = UIFont.AppFonts.openSansRegular(with: 13)
+        slider.minLabelFont = UIFont.AppFonts.openSansRegular(with: 13)
+        slider.handleBorderColor = .white
+        slider.tintColor = UIColor.AppColor.lightBlue
+        slider.handleBorderWidth = 2
+        slider.handleDiameter = 20
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        return slider
+    }()
+    
     var filter: MovieFilter = MovieFilter()
     
     override init(frame: CGRect) {
@@ -63,6 +96,8 @@ class FilterView: UIView {
         addTableView()
         addApplyButton()
         addSeparatorLine()
+        addUserScoreTitle()
+        addRateSlider()
     }
     
     func config(with filter: MovieFilter) {
@@ -82,6 +117,13 @@ class FilterView: UIView {
         sortByTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
         sortByTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
         sortByTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
+    }
+    
+    func addUserScoreTitle() {
+        addSubview(userScoreTitle)
+        userScoreTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
+        userScoreTitle.topAnchor.constraint(equalTo: separatorLine.bottomAnchor, constant: 15).isActive = true
+        userScoreTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
     }
     
     func addTableView() {
@@ -115,6 +157,8 @@ class FilterView: UIView {
         applyButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         applyButton.rx.tap.bind {
+            self.filter.maxRating = Double(self.rateSlider.selectedMaxValue)
+            self.filter.minRating = Double(self.rateSlider.selectedMinValue)
             self.filterDidApply.onNext(self.filter)
             self.removeFromSuperview()
         }.disposed(by: disposeBag)
@@ -126,6 +170,14 @@ class FilterView: UIView {
         separatorLine.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
         separatorLine.topAnchor.constraint(equalTo: sortByTableView.bottomAnchor, constant: 15).isActive = true
         separatorLine.heightAnchor.constraint(equalToConstant: 2).isActive = true
+    }
+    
+    func addRateSlider() {
+        addSubview(rateSlider)
+        rateSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
+        rateSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+        rateSlider.topAnchor.constraint(equalTo: userScoreTitle.bottomAnchor, constant: 5).isActive = true
+        rateSlider.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
     
     /*
