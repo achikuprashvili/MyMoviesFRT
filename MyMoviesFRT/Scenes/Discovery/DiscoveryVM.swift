@@ -18,6 +18,7 @@ protocol DiscoveryVMProtocol {
     func showDiscoveryMovies()
     func setFilter(filter: MovieFilter)
     func loadMore()
+    func fetchFavouriteMovies()
     
     var networkIsReachable: BehaviorSubject<Bool> { get }
     var movies: PublishSubject<[Movie]> { get }
@@ -41,6 +42,7 @@ class DiscoveryVM: MVVMViewModel {
     var showNoNetworkPlaceholder: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: false)
     var movies: PublishSubject<[Movie]> = PublishSubject<[Movie]>()
     var handleError: PublishSubject<Error> = PublishSubject<Error>()
+    var favouriteMovies: [Movie] = []
     
     private var isLoading: Bool = false
     private var page: Int = 1
@@ -77,9 +79,15 @@ extension DiscoveryVM: DiscoveryVMProtocol {
     
     func showFavoriteMovies() {
         selectedSegment = 1
-        let moviesToShow = dataManager.getAllFavouriteMovies()
-        self.movies.onNext(moviesToShow)
-        self.showEmptyScreenPlaceholder.onNext(moviesToShow.count == 0)
+        self.movies.onNext(favouriteMovies)
+        self.showEmptyScreenPlaceholder.onNext(favouriteMovies.count == 0)
+    }
+    
+    func fetchFavouriteMovies() {
+        self.favouriteMovies = dataManager.getAllFavouriteMovies()
+        if selectedSegment == 1 {
+            showFavoriteMovies()
+        }
     }
     
     func showDiscoveryMovies() {

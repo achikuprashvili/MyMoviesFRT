@@ -32,6 +32,11 @@ class DiscoveryVC: UIViewController, MVVMViewController {
         initObservables()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.fetchFavouriteMovies()
+    }
+    
     func setupUI() {
         self.view.backgroundColor = UIColor.AppColor.lightBlue
         addLogoToNavigationBar()

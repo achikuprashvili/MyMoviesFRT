@@ -67,7 +67,7 @@ extension DataManager {
     }
     
     func deleteMovieFromFavourite(with id: Int) {
-        let context = persistentContainer.newBackgroundContext()
+        let context = persistentContainer.viewContext
         context.performAndWait {
             guard let object = getFavoriteMovie(with: id) else {
                 return
