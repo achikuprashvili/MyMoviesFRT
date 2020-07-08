@@ -38,8 +38,11 @@ class DiscoveryVC: UIViewController, MVVMViewController {
         
         let button = UIButton()
         button.setImage(UIImage(named: "filter")?.withTintColor(UIColor.AppColor.lightGreen), for: .normal)
-        button.rx.tap.bind {
-            self.addFilterView()
+        button
+            .rx
+            .tap
+            .bind {
+                self.addFilterView()
         }.disposed(by: disposeBag)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
@@ -63,9 +66,7 @@ class DiscoveryVC: UIViewController, MVVMViewController {
                 default:
                     break
                 }
-            }, onError: { (error) in
-            }, onCompleted: nil
-            , onDisposed: nil
+            }
         ).disposed(by: disposeBag)
     }
     

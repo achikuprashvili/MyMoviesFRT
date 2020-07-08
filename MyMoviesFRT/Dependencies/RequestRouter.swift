@@ -21,9 +21,6 @@ extension RequestRouter {
     func asURLRequest() throws -> URLRequest {
         let url = try (Constants.baseURL + path).asURL()
         var urlRequest = try URLEncoding.default.encode(URLRequest(url: url), with: parameters)
-        
-//        let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-//        urlRequest.httpBody = httpBody
         urlRequest.httpMethod = method.rawValue
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")

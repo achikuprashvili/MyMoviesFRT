@@ -17,6 +17,7 @@ protocol DataManagerProtocol {
     func saveMovieAs(favourite: Movie)
     func deleteMovieFromFavourite(with id: Int)
     func getAllFavouriteMovies() -> [Movie]
+    func isFavouriteMovie(movieId: Int) -> Bool
 }
 
 class DataManager: DataManagerProtocol {
@@ -50,6 +51,11 @@ class DataManager: DataManagerProtocol {
 }
 
 extension DataManager {
+    
+    func isFavouriteMovie(movieId: Int) -> Bool {
+        return getFavoriteMovie(with: movieId) != nil 
+    }
+    
     func saveMovieAs(favourite: Movie) {
         let context = persistentContainer.newBackgroundContext()
         context.performAndWait {

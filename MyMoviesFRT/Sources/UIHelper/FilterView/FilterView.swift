@@ -44,6 +44,7 @@ class FilterView: UIView {
         tableView.register(UINib(nibName: SortByTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: SortByTableViewCell.reuseIdentifier)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
+        tableView.bounces = false
         return tableView
     }()
     
@@ -216,13 +217,4 @@ class FilterView: UIView {
         rateSlider.heightAnchor.constraint(equalToConstant: 44).isActive = true
         rateSlider.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40).isActive = true
     }
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }

@@ -121,10 +121,6 @@ extension DiscoveryVM: DiscoveryVMProtocol {
             self.handleError.onNext(error)
             self.showEmptyScreenPlaceholder.onNext(self.discoveryMovies.count == 0)
             self.showActivityIndicator.onNext(self.isLoading)
-        }, onCompleted: {
-
-        }) {
-
-        }.disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
     }
 }

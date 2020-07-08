@@ -53,8 +53,7 @@ class BackendManager: BackendManagerProtocol {
                 observer.onError(error)
             }).disposed(by: self.disposeBag)
             
-            return Disposables.create {
-            }
+            return Disposables.create { }
         }
     }
     
@@ -73,9 +72,7 @@ class BackendManager: BackendManagerProtocol {
                 observer.onError(error)
             }
             
-            return Disposables.create {
-                
-            }
+            return Disposables.create { }
         }
     }
     
