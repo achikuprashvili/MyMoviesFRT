@@ -53,7 +53,7 @@ extension MovieVM: MovieVMProtocol {
     }
     
     func getOriginalTitle() -> String {
-        return movie.originalTitle
+        return "(\(movie.originalTitle))"
     }
     
     func getRating() -> String {
@@ -66,7 +66,7 @@ extension MovieVM: MovieVMProtocol {
     }
     
     func getReleaseDate() -> String {
-        return movie.releaseDate
+        return movie.releaseDate.getUserFriendlyDateString()
     }
     
     func getPosterUrl() -> URL? {
